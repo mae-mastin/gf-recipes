@@ -1,7 +1,6 @@
 import React from "react"
 
 
-
 class Recipe extends React.Component {  
   constructor(props) {
       super(props)
@@ -9,43 +8,46 @@ class Recipe extends React.Component {
       this.state = {
         imageUrl: "",
         title: "",
-        readyInMinutes: "",
         servings: "",
         sourceUrl: "",
         glutenFreeCheck: "",
       }
+  }
 
-      console.log("got here")
-      console.log("id is " + this.props.recipeId)
 
-      fetch(
-        `https://api.spoonacular.com/recipes/${this.props.recipeId}/information?apiKey=282f91f48b0046f098420a29351cf325&includeNutrition=false` 
-      )
-        .then(response => response.json())
-        .then(data => { 
-          this.setState({imageUrl: data.imageUrl});
-          this.setState({title: data.title});
-          this.setState({readyInMinutes: data.readyInMinutes});
-          this.setState({servings: data.servings});
-          this.setState({sourceUrl: data.sourceUrl});
-          this.setState({glutenFreeCheck: data.glutenFree});
-        })
-        .catch(() => {
-          console.log("error")
-        })
-    }      
+  componentDidMount() {
+    fetch(
+      `https://api.spoonacular.com/recipes/${this.props.id}/information?apiKey=282f91f48b0046f098420a29351cf325&includeNutrition=false` 
+    )
+      .then(response => response.json())
+      .then(data => { 
+        console.log(data)
+        this.setState({
+          imageUrl: data.image,
+          title: data.title,
+          servings: data.servings,
+          sourceUrl: data.sourceUrl,
+          glutenFreeCheck: data.glutenFree
+      })
+      
+    })
+      .catch(() => {
+        console.log("error")
+      })
+  }
+  
 
   render () {
     return (
-      <div className="Recipe">
-        <p>{this.state.imageUrl}</p>
+      <div className="recipe" key = {this.props.id}>
+        <img src={this.state.imageUrl} alt = {this.state.title}></img>
         <p>{this.state.title}</p>  
-        <p>{this.state.readyInMinutes}</p> 
-        <p>{this.state.servings}</p>    
-        <p>{this.state.sourceUrl}</p>
+        <p>Servings: {this.state.servings}</p>
+        <a href = {this.state.sourceUrl}>Get full recipe</a>    
         <p>{this.state.glutenFreeCheck}</p>
       </div>
     )
   }
 }
 export default Recipe;
+

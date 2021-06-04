@@ -1,27 +1,28 @@
 import React from "react"
 import Recipe from "./Recipe"
 
-export default function Results({ searchResults }) {
 
-  if (searchResults.results.length === 0) {
+class SearchResults extends React.Component {  
+
+
+  render () {
+    const recipes = this.props.results.results
+    if (recipes === undefined) {
+      return (
+        <div className="searchResults">
+        </div>
+    );
+    }
+    if (recipes.length === 0) {
+        return <div>Sorry! No recipes found.</div>
+    }
     return (
-      <main>
-      <section className="recipes">
-        Sorry! We didn't find any recipes. Please try again! 
-      </section>
-    </main>
-    )
+        <div className="searchResults" key = {recipes[0].id}>
+          {recipes.map(recipe => {return <Recipe recipe={recipe} id={recipe.id}/>})}
+        </div>
+    );
   }
-
-  return (
-    <main>
-      <section className="recipes">
-        {
-          searchResults.results.map(recipe => {
-            return <Recipe key={recipe.id} recipe={recipe} />
-          })
-        }
-      </section>
-    </main>
-  )
 }
+
+
+export default SearchResults;
