@@ -139,14 +139,12 @@
 
   @media screen and (max-width: 1030px) {
     .recipe {
-      border: 1px solid green;
       flex: 0 0 45%;
     }
   }
 
   @media screen and (max-width: 690px) {
     .recipe {
-      border: 1px solid blue;
       flex: 0 0 85%;
     }
   }
