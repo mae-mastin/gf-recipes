@@ -48,7 +48,7 @@ class App extends React.Component {
         <div className = "top">
           <input
             type="string"
-            placeholder="Search for a gluten free recipe..."
+            placeholder="Search for a gluten free recipe (ex: coffee, dinner, ice cream)..."
             onChange={this.enterSearch}
             onKeyPress={this.handleKeyPress}
           />
