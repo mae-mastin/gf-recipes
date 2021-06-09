@@ -3,8 +3,6 @@ import Recipe from "./Recipe"
 
 
 class SearchResults extends React.Component {  
-
-
   render () {
     const recipes = this.props.results.results
     if (recipes === undefined) {
@@ -14,7 +12,7 @@ class SearchResults extends React.Component {
     );
     }
     if (recipes.length === 0) {
-        return <div>Sorry! No recipes found.</div>
+        return <div><p>Sorry! No recipes found.</p></div>
     }
     return (
         <div className="searchResults" key = {recipes[0].id}>
